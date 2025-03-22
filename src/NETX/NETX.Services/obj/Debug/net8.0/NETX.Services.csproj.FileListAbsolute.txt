@@ -1,0 +1,17 @@
+C:\Users\wolfy\source\repos\NETX\NETX.Services\bin\Debug\net8.0\NETX.Services.deps.json
+C:\Users\wolfy\source\repos\NETX\NETX.Services\bin\Debug\net8.0\NETX.Services.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Services\bin\Debug\net8.0\NETX.Services.pdb
+C:\Users\wolfy\source\repos\NETX\NETX.Services\bin\Debug\net8.0\NETX.Common.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Services\bin\Debug\net8.0\NETX.Core.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Services\bin\Debug\net8.0\NETX.Core.pdb
+C:\Users\wolfy\source\repos\NETX\NETX.Services\bin\Debug\net8.0\NETX.Common.pdb
+C:\Users\wolfy\source\repos\NETX\NETX.Services\obj\Debug\net8.0\NETX.Services.csproj.AssemblyReference.cache
+C:\Users\wolfy\source\repos\NETX\NETX.Services\obj\Debug\net8.0\NETX.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wolfy\source\repos\NETX\NETX.Services\obj\Debug\net8.0\NETX.Services.AssemblyInfoInputs.cache
+C:\Users\wolfy\source\repos\NETX\NETX.Services\obj\Debug\net8.0\NETX.Services.AssemblyInfo.cs
+C:\Users\wolfy\source\repos\NETX\NETX.Services\obj\Debug\net8.0\NETX.Services.csproj.CoreCompileInputs.cache
+C:\Users\wolfy\source\repos\NETX\NETX.Services\obj\Debug\net8.0\NETX.Ser.858DC579.Up2Date
+C:\Users\wolfy\source\repos\NETX\NETX.Services\obj\Debug\net8.0\NETX.Services.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Services\obj\Debug\net8.0\refint\NETX.Services.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Services\obj\Debug\net8.0\NETX.Services.pdb
+C:\Users\wolfy\source\repos\NETX\NETX.Services\obj\Debug\net8.0\ref\NETX.Services.dll

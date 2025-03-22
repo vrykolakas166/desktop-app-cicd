@@ -1,0 +1,17 @@
+C:\Users\wolfy\source\repos\NETX\NETX.Core\bin\Debug\net8.0\NETX.Core.deps.json
+C:\Users\wolfy\source\repos\NETX\NETX.Core\bin\Debug\net8.0\NETX.Core.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Core\bin\Debug\net8.0\NETX.Core.pdb
+C:\Users\wolfy\source\repos\NETX\NETX.Core\bin\Debug\net8.0\NETX.Common.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Core\bin\Debug\net8.0\NETX.Common.pdb
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\NETX.Core.csproj.AssemblyReference.cache
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\NETX.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\NETX.Core.AssemblyInfoInputs.cache
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\NETX.Core.AssemblyInfo.cs
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\NETX.Core.csproj.CoreCompileInputs.cache
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\NETX.Core.csproj.Up2Date
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\NETX.Core.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\refint\NETX.Core.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\NETX.Core.pdb
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\ref\NETX.Core.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Core\bin\Debug\net8.0\NETX.Core.runtimeconfig.json
+C:\Users\wolfy\source\repos\NETX\NETX.Core\obj\Debug\net8.0\NETX.Core.genruntimeconfig.cache

@@ -1,0 +1,11 @@
+C:\Users\wolfy\source\repos\NETX\NETX.Common\bin\Debug\net8.0\NETX.Common.deps.json
+C:\Users\wolfy\source\repos\NETX\NETX.Common\bin\Debug\net8.0\NETX.Common.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Common\bin\Debug\net8.0\NETX.Common.pdb
+C:\Users\wolfy\source\repos\NETX\NETX.Common\obj\Debug\net8.0\NETX.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wolfy\source\repos\NETX\NETX.Common\obj\Debug\net8.0\NETX.Common.AssemblyInfoInputs.cache
+C:\Users\wolfy\source\repos\NETX\NETX.Common\obj\Debug\net8.0\NETX.Common.AssemblyInfo.cs
+C:\Users\wolfy\source\repos\NETX\NETX.Common\obj\Debug\net8.0\NETX.Common.csproj.CoreCompileInputs.cache
+C:\Users\wolfy\source\repos\NETX\NETX.Common\obj\Debug\net8.0\NETX.Common.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Common\obj\Debug\net8.0\refint\NETX.Common.dll
+C:\Users\wolfy\source\repos\NETX\NETX.Common\obj\Debug\net8.0\NETX.Common.pdb
+C:\Users\wolfy\source\repos\NETX\NETX.Common\obj\Debug\net8.0\ref\NETX.Common.dll
