@@ -1,0 +1,58 @@
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.x
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build Solution
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish WPF Application
+        run: dotnet publish -c Release -r win-x64 --self-contained true -o out
+
+      - name: Zip Build Artifacts
+        run: Compress-Archive -Path out/* -DestinationPath netx.zip
+
+      - name: Get Latest Tag
+        id: get_version
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
+          VERSION=$(echo $LAST_TAG | awk -F. '{$NF+=1; OFS="."; print $0}')
+          echo "NEW_VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Create New Git Tag
+        run: |
+          git tag ${{ env.NEW_VERSION }}
+          git push origin ${{ env.NEW_VERSION }}
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: netx.zip
+          tag_name: ${{ env.NEW_VERSION }}
+          name: "Release ${{ env.NEW_VERSION }}"
+          body: "New release version ${{ env.NEW_VERSION }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
