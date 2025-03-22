@@ -1,0 +1,122 @@
+﻿<Window x:Class="NETX.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NETX.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:vm="clr-namespace:NETX.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:uc="clr-namespace:NETX.Views.Layout"
+        mc:Ignorable="d"
+        Style="{StaticResource MaterialDesignWindow}"
+        WindowStyle="None" 
+        WindowStartupLocation="CenterScreen"
+        Height="500" Width="660"
+        MinHeight="200" MinWidth="400">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      GlassFrameThickness="3"
+                      NonClientFrameEdges="None"
+                      ResizeBorderThickness="3"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <vm:MainWindowViewModel x:Key="ViewModel" />
+    </Window.Resources>
+
+    <DockPanel DataContext="{StaticResource ViewModel}">
+        <uc:ControlBar DockPanel.Dock="Top" Title="NETX"/>
+
+        <Grid DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+                        <Setter Property="Width" Value="100" />
+                        <Setter Property="Padding" Value="5, 3" />
+                        <Setter Property="Margin" Value="20, 0"/>
+                    </Style>
+                </Grid.Resources>
+                <Button Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        Command="{Binding QuickNavigateToHomeCommand}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Home" VerticalAlignment="Center"/>
+                            <TextBlock Margin="5,0,0,0" Text="Home" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Command="{Binding QuickNavigateToSettingCommand}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Settings" VerticalAlignment="Center"/>
+                            <TextBlock Margin="5,0,0,0" Text="Settings" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </Grid>
+            <StackPanel Grid.Row="1"
+                        Margin="20, 20, 20, 10">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                            <Setter Property="Padding" Value="3" />
+                            <Setter Property="Height" Value="24" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Command="{Binding CopySuggestionTextCommand}">
+                        <Button.Content>
+                            <materialDesign:PackIcon>
+                                <materialDesign:PackIcon.Style>
+                                    <Style TargetType="materialDesign:PackIcon">
+                                        <Setter Property="Kind" Value="ClipboardMultipleOutline"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CanCopySuggestionText}" Value="false">
+                                                <Setter Property="Kind" Value="ClipboardCheckMultipleOutline"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </materialDesign:PackIcon.Style>
+                            </materialDesign:PackIcon>
+                        </Button.Content>
+                    </Button>
+                    <Button Command="{Binding ClearSuggestionTextCommand}">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="ClearOutline"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                <materialDesign:AutoSuggestBox
+                    materialDesign:HintAssist.Hint="What are you looking for ?"
+                    DropDownElevation="Dp1"
+                    Suggestions="{Binding SuggestionList}"
+                    Text="{Binding SuggestionText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    ValueMember="Value">
+                    <materialDesign:AutoSuggestBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Value}" />
+                        </DataTemplate>
+                    </materialDesign:AutoSuggestBox.ItemTemplate>
+                </materialDesign:AutoSuggestBox>
+            </StackPanel>
+        </Grid>
+
+        <!-- Main content -->
+        <Grid Margin="20, 10">
+            <Frame Content="{Binding CurrentPage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                   NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </DockPanel>
+</Window>

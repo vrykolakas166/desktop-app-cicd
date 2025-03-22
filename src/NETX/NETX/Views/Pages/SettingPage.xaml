@@ -1,0 +1,268 @@
+﻿<Page x:Class="NETX.Views.Pages.SettingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:conv="clr-namespace:NETX.Converters"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:local="clr-namespace:NETX.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SettingPage">
+    <Page.Resources>
+        <conv:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- UPDATE SECTION -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal"
+                        Margin="20 0 0 0"
+                        HorizontalAlignment="Left">
+                <Grid Width="90">
+                    <Viewbox Width="80"
+                         Height="80"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Cached"/>
+                    </Viewbox>
+                    <Viewbox Width="30"
+                             Height="30"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center">
+                        <Grid>
+                            <Grid x:Name="LatestIcon"
+                              Visibility="{Binding ApplicationUpdateInfo.LatestIconIconVisible, Converter={StaticResource boolToVisibilityConverter}, Mode=OneWay}">
+                                <materialDesign:PackIcon Kind="CheckCircle"
+                                                         Foreground="Green" />
+                            </Grid>
+                            <Grid x:Name="NeedUpdateIcon"
+                              Visibility="{Binding ApplicationUpdateInfo.NeedUpdateIconVisible, Converter={StaticResource boolToVisibilityConverter}, Mode=OneWay}">
+                                <materialDesign:PackIcon Kind="Cancel"
+                                                         Foreground="Red" />
+                            </Grid>
+                        </Grid>
+                    </Viewbox>
+                </Grid>
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center">
+                    <TextBlock x:Name="UpdateMessage"
+                               Text="{Binding ApplicationUpdateInfo.UpdateMessage, Mode=OneWay}"
+                               Style="{StaticResource MaterialDesignTitleMediumTextBlock}"/>
+                    <TextBlock x:Name="LastUpdateMessage" 
+                               Text="{Binding ApplicationUpdateInfo.LastUpdateMessage, Mode=OneWay}"
+                               Style="{StaticResource MaterialDesignLabelSmallTextBlock}" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0 0 20 0"
+                        Width="150">
+                <Button x:Name="CheckUpdateButton"
+                        IsEnabled="{Binding ApplicationUpdateInfo.CheckUpdateButtonEnable, Mode=OneWay}"
+                        Visibility="{Binding ApplicationUpdateInfo.CheckUpdateButtonVisible, Converter={StaticResource boolToVisibilityConverter}, Mode=OneWay}"
+                        Command="{Binding CheckUpdateFromServerCommand}"
+                        Content="Check update" />
+                <Button x:Name="UpdateNowButton"
+                        Command="{Binding DownloadUpdateFromServerCommand}"
+                        IsEnabled="{Binding ApplicationUpdateInfo.UpdateNowButtonEnable, Mode=OneWay}"
+                        Visibility="{Binding ApplicationUpdateInfo.UpdateNowButtonVisible, Converter={StaticResource boolToVisibilityConverter}, Mode=OneWay}">
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="UpdateNowButtonToolTip" 
+                                 Content="{Binding ApplicationUpdateInfo.UpdateNowButtonToolTipContent, Converter={StaticResource boolToVisibilityConverter}, Mode=OneWay}"/>
+                    </ToolTipService.ToolTip>
+                    <Grid>
+                        <TextBlock x:Name="UpdateNowButtonText" 
+                                   Visibility="{Binding ApplicationUpdateInfo.UpdateNowButtonTextVisible, Converter={StaticResource boolToVisibilityConverter}, Mode=OneWay}"
+                                   Text="Update now" />
+                        <ProgressBar x:Name="UpdateNowButtonProgress"
+                                     Foreground="White"
+                                     Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                     IsIndeterminate="True"
+                                     Width="20"
+                                     Height="20"
+                                     Visibility="{Binding ApplicationUpdateInfo.UpdateNowButtonProgressVisible, Converter={StaticResource boolToVisibilityConverter}, Mode=OneWay}"/>
+                    </Grid>
+                </Button>
+                <TextBlock x:Name="CheckUpdateButtonMessage"
+                           Text="{Binding ApplicationUpdateInfo.CheckUpdateButtonMessage, Mode=OneWay}"
+                           FontSize="12"
+                           Opacity="0.75"
+                           HorizontalAlignment="Center"/>
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
+                        <Setter Property="Height" Value="35" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </Style>
+                </StackPanel.Resources>
+            </StackPanel>
+        </Grid>
+
+        <!-- SETTING SECTION -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Grid.Row="0"
+                            Orientation="Vertical">
+                    <Expander Header="Server configuration"
+                              BorderThickness="1"
+                              BorderBrush="{StaticResource MaterialDesignShadowBrush}"
+                              HorizontalAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch"
+                              Margin="20 10 20 0">
+                        <Grid HorizontalAlignment="Stretch"
+                              Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0"
+                                  VerticalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           Margin="15 0 0 0"
+                                           Text="Version file URL"/>
+                                <TextBox x:Name="VersionFileServerUrlTextBox"
+                                         Grid.Row="1"
+                                         Grid.Column="0"
+                                         Width="Auto"
+                                         Margin="15 0 0 0"
+                                         HorizontalAlignment="Stretch"
+                                         Text="{Binding VersionFileServerUrl, Mode=TwoWay}">
+                                </TextBox>
+                                <Button x:Name="RestoreDefaultVersionFileServerUrlButton"
+                                         Margin="5 0 15 0"
+                                        Grid.Column="1" 
+                                        Grid.Row="1"
+                                        Content="Restore"
+                                        Command="{Binding RestoreDefaultVersionFileServerUrlCommand}"/>
+                            </Grid>
+                            <Grid Grid.Row="1"
+                                  VerticalAlignment="Center"
+                                  Margin="0 10 0 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           Margin="15 0 0 0"
+                                           Text="Release folder URL"/>
+                                <TextBox x:Name="ReleaseFolderServerUrlTextBox"
+                                         Margin="15 0 0 0"
+                                         Grid.Row="1"
+                                         Grid.Column="0"
+                                         HorizontalAlignment="Stretch"
+                                         Text="{Binding ReleaseFolderServerUrl, Mode=TwoWay}">
+                                </TextBox>
+                                <Button x:Name="RestoreDefaultReleaseFolderServerUrlButton"
+                                        Margin="5 0 15 0"
+                                        Grid.Column="1" 
+                                        Grid.Row="1"
+                                        Content="Restore"
+                                        Command="{Binding RestoreDefaultReleaseFolderServerUrlCommand}"/>
+                            </Grid>
+                        </Grid>
+                    </Expander>
+
+                    <Expander Header="Author"
+                              BorderThickness="1"
+                              BorderBrush="{StaticResource MaterialDesignShadowBrush}"
+                              HorizontalAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch"
+                              Margin="20 10 20 0">
+                        <Grid HorizontalAlignment="Stretch"
+                              Margin="20 0 20 10"
+                              Opacity="0.75">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0"
+                                  VerticalAlignment="Center"
+                                  Margin="5 5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="Name:"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="Phuc Pham Hong"/>
+                            </Grid>
+                            <Grid Grid.Row="1"
+                                  VerticalAlignment="Center"
+                                  Margin="5 5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="Role: "/>
+                                <TextBlock Grid.Column="1"
+                                           Text="Software Developer"/>
+                            </Grid>
+                            <Grid Grid.Row="2"
+                                  VerticalAlignment="Center"
+                                  Margin="5 5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="Github: "/>
+                                <TextBlock Grid.Column="1"
+                                           Text="https://github.com/vrykolakas166"/>
+                            </Grid>
+                        </Grid>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Grid.Row="1"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Bottom">
+                <Button Style="{StaticResource MaterialDesignIconButton}"
+                        Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0 0 20 20"
+                        ToolTip="Open maintainence window"
+                        Command="{Binding OpenMaintainenceWindowCommand}">
+                    <materialDesign:PackIcon Width="30"
+                                             Height="30"
+                                             Kind="BugReport"/>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
