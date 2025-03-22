@@ -24,13 +24,13 @@ jobs:
           dotnet-version: 8.x
 
       - name: Restore Dependencies
-        run: dotnet restore
+        run: dotnet restore src/NETX/NETX.sln
 
       - name: Build Solution
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build src/NETX/NETX.sln --configuration Release --no-restore
 
       - name: Publish WPF Application
-        run: dotnet publish -c Release -r win-x64 --self-contained true -o out
+        run: dotnet publish src/NETX/NETX.sln -c Release -r win-x64 --self-contained true -o out
 
       - name: Zip Build Artifacts
         run: Compress-Archive -Path out/* -DestinationPath netx.zip
