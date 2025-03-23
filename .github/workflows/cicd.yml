@@ -35,6 +35,12 @@ jobs:
       - name: Zip Build Artifacts
         run: Compress-Archive -Path release/* -DestinationPath netx.zip
 
+      - name: Configure Git User
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+        shell: bash
+
       - name: Get Latest Tag
         id: get_version
         run: |
@@ -45,8 +51,6 @@ jobs:
 
       - name: Create New Git Tag
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
           git tag ${{ env.NEW_VERSION }}
           git push origin ${{ env.NEW_VERSION }}
         shell: bash
