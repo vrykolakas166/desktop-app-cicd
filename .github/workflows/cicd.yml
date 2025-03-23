@@ -24,7 +24,7 @@ jobs:
           dotnet-version: 8.x
 
       - name: Restore Dependencies
-        run: dotnet restore src/NETX/NETX.sln
+        run: dotnet restore src/NETX/NETX/NETX.csproj
 
       - name: Build Solution
         run: dotnet build src/NETX/NETX/NETX.csproj --configuration Release --no-restore
@@ -41,11 +41,15 @@ jobs:
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
           VERSION=$(echo $LAST_TAG | awk -F. '{$NF+=1; OFS="."; print $0}')
           echo "NEW_VERSION=$VERSION" >> $GITHUB_ENV
+        shell: bash
 
       - name: Create New Git Tag
         run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
           git tag ${{ env.NEW_VERSION }}
           git push origin ${{ env.NEW_VERSION }}
+        shell: bash
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v2
