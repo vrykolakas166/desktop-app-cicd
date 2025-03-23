@@ -7,6 +7,10 @@ using Serilog;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+#if !DEBUG
+using Newtonsoft.Json;
+using System.Net.Http;
+#endif
 
 namespace NETX.ViewModels
 {
@@ -134,11 +138,12 @@ namespace NETX.ViewModels
             {
                 Log.Verbose($"Valid url: {newValue}.");
                 Log.Information("Save VersionFileServerUrl value to config.ini file.");
-                _settingService.Update(Constants.VERSION_FILE_URL, newValue);
+                var isCreated = string.IsNullOrEmpty(_settingService.GetByKey(Constants.VERSION_FILE_URL)?.Value);
+                _ = isCreated ? _settingService.Add(Constants.VERSION_FILE_URL, newValue) : _settingService.Update(Constants.VERSION_FILE_URL, newValue);
             }
             else
             {
-                throw new Exception("Invalid URL.");
+                Log.Error("Invalid URL.");
             }
         }
 
@@ -149,11 +154,12 @@ namespace NETX.ViewModels
             {
                 Log.Verbose($"Valid url: {newValue}.");
                 Log.Information("Save ReleaseFolderServerUrl value to config.ini file.");
-                _settingService.Update(Constants.RELEASE_FOLDER_URL, newValue);
+                var isCreated = string.IsNullOrEmpty(_settingService.GetByKey(Constants.RELEASE_FOLDER_URL)?.Value);
+                _ = isCreated ? _settingService.Add(Constants.RELEASE_FOLDER_URL, newValue) : _settingService.Update(Constants.RELEASE_FOLDER_URL, newValue);
             }
             else
             {
-                throw new Exception("Invalid URL.");
+                Log.Error("Invalid URL.");
             }
         }
 
@@ -259,7 +265,7 @@ namespace NETX.ViewModels
                 }
                 Log.Verbose($"Copy to app location: {AppDomain.CurrentDomain.BaseDirectory}");
 #else
-                // todo
+                await Task.Delay(3000);
 #endif
 
                 ApplicationUpdateInfo.IsDownloading = false;
@@ -296,19 +302,15 @@ namespace NETX.ViewModels
         [RelayCommand]
         private void RestoreDefaultVersionFileServerUrl()
         {
-            VersionFileServerUrl = Constants.DEFAULT_VERSION_FILE_URL;
             Log.Information($"Restore default value of VersionFileServerUrl: {VersionFileServerUrl}.");
-            var isCreated = string.IsNullOrEmpty(_settingService.GetByKey(Constants.VERSION_FILE_URL)?.Value);
-            _ = isCreated ? _settingService.Add(Constants.VERSION_FILE_URL, VersionFileServerUrl) : _settingService.Update(Constants.VERSION_FILE_URL, VersionFileServerUrl);
+            VersionFileServerUrl = Constants.DEFAULT_VERSION_FILE_URL;
         }
 
         [RelayCommand]
         private void RestoreDefaultReleaseFolderServerUrl()
         {
-            ReleaseFolderServerUrl = Constants.DEFAULT_RELEASE_FOLDER_URL;
             Log.Information($"Restore default value of ReleaseFolderServerUrl: {ReleaseFolderServerUrl}.");
-            var isCreated = string.IsNullOrEmpty(_settingService.GetByKey(Constants.RELEASE_FOLDER_URL)?.Value);
-            _ = isCreated ? _settingService.Add(Constants.RELEASE_FOLDER_URL, ReleaseFolderServerUrl) : _settingService.Update(Constants.RELEASE_FOLDER_URL, ReleaseFolderServerUrl);
+            ReleaseFolderServerUrl = Constants.DEFAULT_RELEASE_FOLDER_URL;
         }
 
         [RelayCommand]

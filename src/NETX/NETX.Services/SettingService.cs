@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NETX.Core;
+﻿using NETX.Core;
 using NETX.Core.Models;
 using NETX.Services.Interfaces;
 
