@@ -45,7 +45,7 @@ jobs:
         id: get_version
         run: |
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
-          VERSION=$(echo $LAST_TAG | awk -F. '{$NF+=1; OFS="."; print $0}')
+          VERSION=$(echo $LAST_TAG | awk -F. '{print $1 "." $2 "." $3+1}')
           echo "NEW_VERSION=$VERSION" >> $GITHUB_ENV
         shell: bash
 
